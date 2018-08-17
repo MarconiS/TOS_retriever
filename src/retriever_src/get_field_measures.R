@@ -1,5 +1,5 @@
 get_field_measures <- function(){
-  folder_f = list.files("./Retriever/inputs/dataField/NEON_struct-woody-plant")
+  folder_f = list.files("./inputs/dataField/NEON_struct-woody-plant")
   #ff = folder_f[1]
   tree_data <- NULL
   for(ff in folder_f){
