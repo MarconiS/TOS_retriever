@@ -8,7 +8,7 @@ retrieve_field_data <- function(){
   library(jsonlite)
   
   #source files
-  file.sources = paste("./Retriever/src/retriever_src", list.files("./Retriever/src/retriever_src", pattern="*.R"), sep="/")
+  file.sources = paste("./src/retriever_src", list.files("./src/retriever_src", pattern="*.R"), sep="/")
   sapply(file.sources,source,.GlobalEnv)
   
   #data products download
