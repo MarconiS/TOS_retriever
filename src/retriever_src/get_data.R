@@ -8,8 +8,8 @@ get_data <- function(prd=NULL){
   sitesID <- unlist(avail$data$siteCodes$siteCode)
   
   for(id in sitesID){
-    zipsByProduct(dpID=paste("DP1.", prd, ".001", sep=""), site=id, package="basic", savepath="./Retriever/tmp/", check.size=F)
+    zipsByProduct(dpID=paste("DP1.", prd, ".001", sep=""), site=id, package="basic", savepath="./tmp/", check.size=F)
   }
-  stackByTable(filepath=paste("./Retriever/tmp/filesToStack", prd, "/",sep=""), folder=T)
+  stackByTable(filepath=paste("./tmp/filesToStack", prd, "/",sep=""), folder=T)
   
 }
