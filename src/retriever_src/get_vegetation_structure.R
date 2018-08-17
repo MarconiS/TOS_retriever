@@ -1,4 +1,4 @@
-get_vegetation_structure <- function(){
+get_vegetation_structure <- function(geo_only = T){
   file_tos_coordinates = read_csv("./Retriever/tmp/filesToStack10098/stackedFiles/vst_perplotperyear.csv") %>%
     select(c("plotID","plotType", "utmZone", "easting", "northing", "coordinateUncertainty", "nlcdClass"))
   
@@ -20,5 +20,10 @@ get_vegetation_structure <- function(){
   colnames(coords) <- c('UTM_E', 'UTM_N')
   
   field_tag <- cbind(dat, coords)
-  write_csv(field_tag, './Retriever/out/field_data.csv')                          
+  write_csv(field_tag, './Retriever/out/field_data.csv')  
+  if(geo_only == F){
+    return(file_mapping)
+  } else{
+    return(field_tag)
+  }
 }
