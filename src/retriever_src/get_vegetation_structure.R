@@ -1,7 +1,7 @@
 get_vegetation_structure <- function(geo_only = T){
-  file_tos_coordinates = read_csv("./tmp/filesToStack10098/stackedFiles/vst_perplotperyear.csv") %>%
+  file_tos_coordinates = read_csv("./TOS_retriever/tmp/filesToStack10098/stackedFiles/vst_perplotperyear.csv") %>%
     select(c("plotID","plotType", "utmZone", "easting", "northing", "coordinateUncertainty", "nlcdClass"))
-  
+
   file_mapping = read_csv("./tmp/filesToStack10098/stackedFiles/vst_mappingandtagging.csv") %>%
     select(c("uid", "eventID", "domainID","siteID","plotID","subplotID",
              "nestedSubplotID","pointID","stemDistance","stemAzimuth",
@@ -13,14 +13,14 @@ get_vegetation_structure <- function(geo_only = T){
 
   # get tree coordinates
   dat_apply <- dat %>%
-    select(c(stemDistance, stemAzimuth, easting, northing)) 
+    select(c(stemDistance, stemAzimuth, easting, northing))
   coords <- apply(dat_apply,1,function(params)from_dist_to_utm(params[1],params[2], params[3], params[4])) %>%
     t %>%
     data.frame
   colnames(coords) <- c('UTM_E', 'UTM_N')
-  
+
   field_tag <- cbind(dat, coords)
-  write_csv(field_tag, './out/field_data.csv')  
+  write_csv(field_tag, './TOS_retriever/out/field_data.csv')  
   if(geo_only == F){
     return(file_mapping)
   } else{
