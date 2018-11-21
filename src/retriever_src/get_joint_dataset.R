@@ -10,7 +10,6 @@ get_joint_dataset <- function(){
   #  write_csv('./TOS_retriever/out/field_traits_dataset.csv')
 
   # just the geolocalized data
-  dat <-  inner_join(chemical, structure) %>% #,  by = "individualID") %>%
-    unique %>%
-    write_csv('./TOS_retriever/out/utm_dataset.csv')
+  dat <-  inner_join(chemical, structure[-1]) %>% #,  by = "individualID") %>%
+    unique %>% write_csv('./TOS_retriever/out/utm_dataset.csv')
 }
