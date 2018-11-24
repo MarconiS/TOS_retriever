@@ -9,7 +9,7 @@ get_data <- function(prd=NULL){
 
   for(id in sitesID){
     zipsByProduct(dpID=paste("DP1.", prd, ".001", sep=""), site=id, package="basic",
-    savepath="./TOS_Retriever/tmp/", check.size=F)
+    savepath="./TOS_retriever/tmp/", check.size=F)
   }
   stackByTable(filepath=paste("./TOS_retriever/tmp/filesToStack", prd, "/",sep=""), folder=T)
 
