@@ -9,7 +9,7 @@ retrieve_field_data <- function(){
 
   #source files
   file.sources = paste("./TOS_retriever/src/retriever_src",
-  list.files("./TOS_retriever/src/retriever_src", pattern="*.R"), sep="/")
+    list.files("./TOS_retriever/src/retriever_src", pattern="*.R"), sep="/")
   sapply(file.sources,source,.GlobalEnv)
 
   #data products download
