@@ -24,6 +24,11 @@ get_vegetation_structure <- function(geo_only = T){
   vegstr_mapping = read_csv("./TOS_retriever/tmp/filesToStack10098/stackedFiles/vst_apparentindividual.csv") %>%
     dplyr::select("individualID", "stemDiameter","height","maxCrownDiameter","basalStemDiameter") %>% 
     group_by(individualID) %>% summarize_all(max_no_na)
+  vegstr_mapping$stemDiameter[is.infinite(vegstr_mapping$stemDiameter)] <- NA
+  vegstr_mapping$height[is.infinite(vegstr_mapping$height)] <- NA
+  vegstr_mapping$maxCrownDiameter[is.infinite(vegstr_mapping$maxCrownDiameter)] <- NA
+  vegstr_mapping$basalStemDiameter[is.infinite(vegstr_mapping$basalStemDiameter)] <- NA
+
   #
   field_tag <- cbind(dat, coords)
   field_tag <- right_join(vegstr_mapping, field_tag, by = "individualID") 
