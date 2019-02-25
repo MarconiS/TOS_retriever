@@ -1,10 +1,14 @@
 get_joint_dataset <- function(){
   library(dplyr)
-  chemical <- read_csv("./TOS_retriever/out/chemical_data.csv")
+  chemical <- read_csv("./TOS_retriever/out/chemical_data.csv") %>%
+    select(-one_of("toxicodendronPossible.x", "toxicodendronPossible.y", 
+                   "chlorophyllSampleCode.x", "chlorophyllSampleCode.y",
+                   "ligninSampleBarcode.x", "ligninSampleBarcode.y", 
+                   "cnSampleCode.x", "cnSampleCode.y"))
   #isotope <- read_csv("./TOS_retriever/out/isotopes_data.csv")
   structure <- read_csv("./TOS_retriever/out/field_data.csv") %>%
     select(-one_of("domainID", "siteID", "plotType", "coordinateUncertainty",
-                   "elevation", "subplotID", "taxonID"))
+                   "elevation", "subplotID", "taxonID", "nlcdClass", "scientificName"))
   
   #join the products all available traits data first
   #dat = inner_join(chemical, isotope,  by = "sampleID") %>%
