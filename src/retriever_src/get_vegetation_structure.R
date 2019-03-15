@@ -5,9 +5,9 @@ get_vegetation_structure <- function(geo_only = T){
                     "nestedSubplotID","pointID","stemDistance","stemAzimuth",
                     "individualID","supportingStemIndividualID","previouslyTaggedAs",
                     "taxonID","scientificName"))
-  vst_perplotperyear <- read_csv("./TOS_Retriever/tmp/filesToStack10098/stackedFiles/vst_perplotperyear.csv") %>%
-    dplyr::select("plotID", "elevation") %>% unique
-  file_mapping <- left_join(file_mapping, vst_perplotperyear) 
+  # vst_perplotperyear <- read_csv("./TOS_Retriever/tmp/filesToStack10098/stackedFiles/vst_perplotperyear.csv") %>%
+  #   dplyr::select("plotID", "elevation") %>% unique
+  # file_mapping <- left_join(file_mapping, vst_perplotperyear) 
   plots<-sf::st_read("./TOS_Retriever/dat/All_Neon_TOS_Points_V5.shp")  %>% filter(str_detect(appMods,"vst"))
   dat<-file_mapping %>% 
     mutate(pointID=factor(pointID, levels = levels(plots$pointID))) %>% 
@@ -38,7 +38,7 @@ get_vegetation_structure <- function(geo_only = T){
   
   crown_attributes = left_join(field_tag, apparent, by="individualID") %>%
     unique
-  
+  summary(crown_attributes)
   #write_csv(field_tag, './TOS_Retriever/out/field_data_no_attribute.csv')
   write_csv(crown_attributes, './TOS_Retriever/out/field_data.csv')
 }
